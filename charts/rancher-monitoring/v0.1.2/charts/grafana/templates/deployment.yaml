@@ -65,7 +65,7 @@ spec:
         - name: grafana-static-contents
           mountPath: /usr/share/grafana/public/app/plugins/datasource/prometheus/plugin.json
           subPath: grafana/plugin.json
-        - name: grafana-sc-dashboard #grafana-dashboards
+        - name: sc-dashboard-volume #grafana-dashboards
           mountPath: /var/lib/grafana/rancher-dashboards
         - name: grafana-istio-dashboards
           mountPath: /var/lib/grafana/rancher-istio-dashboards
@@ -176,9 +176,6 @@ spec:
           - key: modify-datasource-plugin-json.sh
             mode: 0777
             path: modify-datasource-plugin-json.sh
-      - name: grafana-dashboards
-        configMap:
-          name: {{ template "app.dashboards.fullname" . }}
       - name: grafana-istio-dashboards
         configMap:
           name: {{ template "app.dashboards.istio-fullname" . }}
